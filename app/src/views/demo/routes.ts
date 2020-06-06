@@ -4,6 +4,7 @@ const routes: RouteConfig[] = [
     path: '/demo',
     windowOptions: {
       frame: true,
+
       titleBarStyle: 'default',
     },
     createConfig: {

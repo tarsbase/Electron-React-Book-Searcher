@@ -18,5 +18,13 @@ export const Register = import('./views/register/Register')
 
 export const Login = import('./views/login/Login')
 
+export const Trans = import('./views/trans-window/trans-window')
+
+export const Details = import('./views/details/Details')
+
+export const Preview = import('./views/preview/Preview')
+
+export const User = import('./views/user/User')
+
 // 同步引用，注意这不会出发 beforeRouter
 export { default as AlertModal } from './views/modals/alert-modal'

@@ -6,9 +6,10 @@ const routes: RouteConfig[] = [
       title: 'User login',
       width: 600,
       height: 400,
-      minWidth: 600,
-      minHeight: 400,
-      vibrancy: 'selection',
+      // minWidth: 600,
+      // minHeight: 400,
+
+      frame: false,
       transparent: true,
     },
     createConfig: {

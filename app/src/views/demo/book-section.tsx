@@ -1,16 +1,14 @@
 import * as React from 'react'
-import axios from 'axios'
 // import { Button, Input, Spin, Card } from 'antd'
 import { withStore } from '@/src/components'
 import Store from 'electron-store'
-import { Layout, Skeleton, Row, Col, Divider } from 'antd'
-import { UserOutlined, LockOutlined, SyncOutlined } from '@ant-design/icons'
-import ItemList from './book-section/ItemList'
-const { Content, Sider } = Layout
+import { Skeleton, Row, Col, Divider } from 'antd'
+import { SyncOutlined } from '@ant-design/icons'
+import ItemList from './ItemList'
+import './book-section.less'
 const store = new Store<any>()
 interface BookSectionProps {
   title: string
-  ref: any
 }
 
 declare interface BookSectionState {
@@ -36,6 +34,8 @@ export default class BookSection extends React.Component<BookSectionProps, BookS
   state: BookSectionState = {
     resData: {
       results: [{}],
+      count: 1,
+      next: '',
     },
     loading: false,
     createWindowLoading: false,
@@ -63,8 +63,8 @@ export default class BookSection extends React.Component<BookSectionProps, BookS
   }
 
   sectiontitle = (
-    <Divider orientation="left" style={{ color: '#333', fontWeight: 'normal' }}>
-      【{this.props.title}】
+    <Divider className="book-divider" orientation="left" style={{ color: '#333', fontWeight: 'normal' }}>
+      {this.props.title}
     </Divider>
   )
   requestTest(bookname: string) {
@@ -72,55 +72,75 @@ export default class BookSection extends React.Component<BookSectionProps, BookS
       loading: true,
       resData: {
         results: [],
+        count: 0,
+        next: '',
       },
     })
     $api
       .queryTestInfo(bookname, { page: 1 }, { headers: { Authorization: `Token ${store.get('user')}` } })
       .then(resData => {
-        console.log('requestTest')
-        console.log(resData)
         this.setState({ resData: resData })
       })
       .catch(err => {
         $tools.createWindow('Login', {
-          windowOptions: { modal: true, parent: undefined, title: 'Login' },
+          windowOptions: { title: 'Login', transparent: true },
         })
       })
       .finally(() => {
-        this.setState({ loading: false })
+        if (this.state.resData.results.length > 0) {
+          this.setState({ loading: false })
+        } else {
+          this.setState({ loading: true })
+        }
+        // this.setState({ loading: false })
       })
   }
-  requestRandomTest(bookname: string, keyword: number) {
+  requestRandomTest(bookname: string) {
     this.setState({
       loading: true,
       resData: {
         results: [],
       },
     })
+    let randompage: number
+    if (this.state.resData.length > 0) {
+      randompage = Math.floor((Math.random() * this.state.resData.count) / 22 + 1)
+    } else {
+      randompage = 1
+    }
 
     $api
-      .queryTestInfo(bookname, { page: 1 }, { headers: { Authorization: `Token ${store.get('user')}` } })
+      .queryTestInfo(
+        bookname,
+        { page: randompage },
+        { headers: { Authorization: `Token ${store.get('user')}` } }
+      )
       .then(resData => {
         console.log(resData)
         this.setState({ resData: resData })
       })
       .catch(err => {
+        console.log('Errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
+        console.log(err)
         $tools.createWindow('Login', {
-          windowOptions: { modal: true, parent: undefined, title: 'Login' },
+          windowOptions: { title: 'Login', frame: false, transparent: true },
         })
       })
       .finally(() => {
-        this.setState({ loading: false })
+        if (this.state.resData.results.length > 0) {
+          this.setState({ loading: false })
+        } else {
+          this.setState({ loading: true })
+        }
       })
   }
   render() {
-    const { ref } = this.props
     // const { resData, loading, createWindowLoading, asyncDispatchLoading } = this.state
     // const { count: reduxCount, countAlias } = this.props
     const syncicon = <SyncOutlined></SyncOutlined>
     const nosyncicon = <SyncOutlined spin></SyncOutlined>
     return (
-      <section id="kexue" ref={ref}>
+      <section id="kexue" className="book-section">
         {this.state.resData.results.length > 0 ? this.sectiontitle : ''}
 
         <Skeleton loading={this.state.loading} key="Skeleton1" active className="skeleton-holder"></Skeleton>

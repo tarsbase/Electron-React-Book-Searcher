@@ -1,12 +1,3 @@
-@import '~@/src/styles/_var.less';
-.about {
-  background-color: @titlebar_background;
-}
-@font-face {
-  font-family: 'iconfont';
-  // src: url('iconfont.ttf') format('truetype');
-}
-
 * {
   user-select: none;
 }
@@ -14,7 +5,8 @@
 html,
 body {
   overflow: hidden;
-  background-color: white;
+  // background-color: #fff;
+  background-color: transparent;
 }
 
 body {
@@ -26,12 +18,12 @@ body {
 
 canvas {
   position: fixed;
-  top: 0;
-  left: 67px;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 68px;
   opacity: 0.8;
-  // z-index: -;
+  // z-index: -1;
 }
 
 .dg {
@@ -115,7 +107,6 @@ canvas {
   font-size: 2.8vmax;
   font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
   text-align: center;
-  // background-image: url('promo_back.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -168,6 +159,6 @@ canvas {
   }
   100% {
     transform: scale(1);
-    opacity: 0.5;
+    opacity: 1;
   }
 }

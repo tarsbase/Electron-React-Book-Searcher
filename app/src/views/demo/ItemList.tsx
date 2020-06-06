@@ -19,7 +19,7 @@ export default class ItemList extends React.Component<CarouselListItemProps> {
         items: 10,
       },
       desktop: {
-        breakpoint: { max: 3000, min: 1024 },
+        breakpoint: { max: 1500, min: 1024 },
         items: 6,
       },
       tablet: {
@@ -34,7 +34,7 @@ export default class ItemList extends React.Component<CarouselListItemProps> {
     return (
       <Carousel responsive={responsive} infinite={true} itemClass="item-class">
         {items.map(item => (
-          <Item item={item} key={item.book_origin}></Item>
+          <Item item={item} key={item.id}></Item>
         ))}
       </Carousel>
     )

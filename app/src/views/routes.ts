@@ -5,11 +5,9 @@ const routes: RouteConfig[] = [
     redirect: { to: '/demo?form=home' },
     windowOptions: {
       title: 'App Home (redirect to demo)',
-      width: 1200,
-      height: 800,
-      minWidth: 800,
+      transparent: true,
       minHeight: 600,
-      backgroundColor: '#fffff',
+      minWidth: 1000,
     },
     createConfig: {
       showSidebar: true,

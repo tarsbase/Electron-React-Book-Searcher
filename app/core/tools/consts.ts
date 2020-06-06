@@ -33,27 +33,36 @@ export const SIGN_UP = asAssetsPath('demo-jpg/sign-up.jpg')
 /** 暗色风格托盘图标 (仅 macOS) */
 export const TRAY_ICON_DARK = asAssetsPath('tray-icon/tray-icon-dark.png')
 
+/** 预览文件 */
+
+export const PREFILE = asAssetsPath('preview-file/10556079.epub')
+
+export const AssetsPath = asAssetsPath
+
 /** 创建新窗口时默认加载的选项 */
 export const DEFAULT_WINDOW_OPTIONS: BrowserWindowConstructorOptions = {
-  icon: APP_ICON,
-  minWidth: 200,
-  minHeight: 200,
-  width: 800,
-  height: 600,
-  show: false,
-  hasShadow: true,
+  width: 1200,
+  height: 900,
+  resizable: true,
   webPreferences: {
     nodeIntegration: true,
     scrollBounce: true,
   },
-  titleBarStyle: 'default', // 隐藏标题栏, 但显示窗口控制按钮
+  transparent: true,
+
+  // transparent: true, // 窗口是否透明
+  show: false,
+  // hasShadow: true,
+  // icon: APP_ICON,
+  // minWidth: 200,
+  // minHeight: 200,
+  titleBarStyle: 'hidden', // 隐藏标题栏, 但显示窗口控制按钮
   // frame: process.platform === 'darwin' ? true : false, // 无边框窗口
   frame: true, // 无边框窗口
   // skipTaskbar: false, // 是否在任务栏中隐藏窗口
   // backgroundColor: '#fff',
-  transparent: true, // 窗口是否透明
   // titleBarStyle: 'default',
-  vibrancy: 'selection', // 毛玻璃效果
+  // vibrancy: 'selection', // 毛玻璃效果
 }
 
 export const DEFAULT_INITIAL_CONFIG: CreateConfig = {
@@ -62,5 +71,5 @@ export const DEFAULT_INITIAL_CONFIG: CreateConfig = {
   autoShow: true,
   delayToShow: 10,
   single: true,
-  hideMenus: false,
+  hideMenus: true,
 }
